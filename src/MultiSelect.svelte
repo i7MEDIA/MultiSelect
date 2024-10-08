@@ -3,7 +3,7 @@
 		options = [],
 		inputCssClass = 'form-control',
 		selectedOptionCssClass = 'badge',
-		placeholder = 'Select an item',
+		placeholder = 'Select an option',
 		oninput,
 	} = $props();
 
@@ -52,8 +52,6 @@
 
 		showMenu = false;
 	}
-
-	function onInput(e) {}
 
 	function onKeydown(e) {
 		if (e.key === 'ArrowDown') {
