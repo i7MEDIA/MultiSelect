@@ -127,7 +127,6 @@
 			font-size: inherit;
 			font-weight: 400;
 			line-height: 0.6;
-			vertical-align: middle;
 		}
 	}
 
@@ -149,9 +148,10 @@
 
 		ul {
 			all: unset;
+			background-color: #fff;
+			box-sizing: border-box;
 			list-style: none outside none;
 			overflow: auto;
-			box-sizing: border-box;
 
 			button {
 				all: unset;
