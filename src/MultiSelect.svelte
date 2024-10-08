@@ -135,6 +135,7 @@
 	}
 
 	.multi-select__items {
+		background-color: #fff;
 		box-sizing: border-box;
 		border: 1px solid #ccc;
 		display: grid;
@@ -148,7 +149,6 @@
 
 		ul {
 			all: unset;
-			background-color: #fff;
 			box-sizing: border-box;
 			list-style: none outside none;
 			overflow: auto;
