@@ -26,6 +26,7 @@
 
 	function onSelect(item) {
 		selectedItems.push(item);
+		search = '';
 		showMenu = false;
 		oninput?.($state.snapshot(selectedItems));
 	}
