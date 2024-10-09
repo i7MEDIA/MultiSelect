@@ -12,7 +12,7 @@
 	let menuItems = $derived(
 		options
 			.filter((x) => !selectedItems.some((si) => si == x))
-			.filter((x) => search.trim() === '' || x.includes(search))
+			.filter((x) => search.trim() === '' || x.any(i = i.toLowerCase() === search.toLowerCase()))
 	);
 	let showMenu = $state(false);
 
