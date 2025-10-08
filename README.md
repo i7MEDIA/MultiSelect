@@ -19,6 +19,8 @@ mount(MultiSelect, {
 	props: {
 		// the options you want to choose from
 		options: ['Item 1', 'Item 2'],
+		// The select element to populate values from (this will overwrite the "options" value)
+		selectElement: '.mySelect',
 		// the CSS classes on the input in the control
 		inputCssClass: 'form-control',
 		// the CSS classes on the selected option in the control

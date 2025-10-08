@@ -1,6 +1,9 @@
 <script>
+	import Option from "./Option";
+
 	let {
 		options = [],
+		selectElement = null,
 		inputCssClass = 'form-control',
 		selectedOptionCssClass = 'badge',
 		placeholder = 'Select an option',
@@ -15,20 +18,40 @@
 			.filter((x) => search.trim() === '' || x.toLowerCase().includes(search.toLowerCase()))
 	);
 	let showMenu = $state(false);
+	let selectOptions = [];
 
 	function removeItem(e, item) {
 		e.preventDefault();
 		e.stopPropagation();
 		selectedItems = selectedItems.filter((x) => x !== item);
-		oninput?.($state.snapshot(selectedItems));
+		oninput?.(unwrapItem(selectedItems));
 		showMenu = false;
+
+		if (selectElement) {
+			selectOptions[item.Index].selected = false;
+		}
+	}
+
+	function unwrapItem(items) {
+		const _items = $state.snapshot(items);
+
+		if (typeof _items[0] === 'object') {
+			return _items.map(x => x.Text);
+		}
+
+		return _items;
 	}
 
 	function onSelect(item) {
 		selectedItems.push(item);
 		search = '';
 		showMenu = false;
-		oninput?.($state.snapshot(selectedItems));
+		oninput?.(unwrapItem(selectedItems));
+		console.log(selectOptions)
+
+		if (selectElement) {
+			selectOptions[item.Index].selected = true;
+		}
 	}
 
 	function openMenu() {
@@ -62,6 +85,17 @@
 	}
 
 	$effect(() => {
+		if (selectElement !== null) {
+			const select = document.querySelector(selectElement);
+
+			if (select) {
+				select.style.display = 'none';
+
+				selectOptions = Array.from(select.children);
+				options = selectOptions.map((option, i) => new Option(i, option.textContent, option.value, option.selcted));
+			}
+		}
+
 		document.addEventListener('click', closeMenu);
 
 		return () => document.removeEventListener('click', closeMenu);
