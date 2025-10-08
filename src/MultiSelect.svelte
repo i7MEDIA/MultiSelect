@@ -95,7 +95,11 @@
 
 				/** @type {HTMLOptionElement[]} */
 				selectOptions = Array.from(select.children);
-				options = selectOptions.map((option, i) => new Option(i, option.textContent, option.value, option.selected));
+				options = selectOptions.map((option, i) => new Option(
+					i,
+					(option?.title.trim() || option.textContent.trim()),
+					option.value, option.selected
+				));
 				selectedItems = options.filter(x => x.Selected);
 			}
 		}
