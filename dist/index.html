@@ -16,9 +16,9 @@
 				<label class="form-label">Select Items</label>
 				<select class="mySelect" multiple>
 					<option value="value1">Option 1</option>
-					<option value="value2">Option 2</option>
+					<option value="value2" selected>Option 2</option>
 					<option value="value3">Option 3</option>
-					<option value="value4">Option 4</option>
+					<option value="value4" selected>Option 4</option>
 				</select>
 				<div id="multiSelect"></div>
 			</div>
@@ -29,13 +29,14 @@
 <script type="module">
 import { mount, MultiSelect } from './MultiSelect.min.js';
 
+// For Demo Only
 const output = document.querySelector('#output');
 const options = Array.from(Array(10), (_, i) => `Option #${i + 1}`);
 
 mount(MultiSelect, {
 	target: document.getElementById('multiSelect'), // where you want the component to render
 	props: {
-		// the options you want to choose from
+		// A string array of options you want to choose from
 		options: options,
 		// The select element to populate values from (this will overwrite the "options" value)
 		selectElement: '.mySelect',
@@ -48,6 +49,7 @@ mount(MultiSelect, {
 		// The callback when the value of the control changes.
 		// "e" is a string array.
 		oninput: (e) => {
+			// For Demo Only
 			output.textContent += '\n' + JSON.stringify(e);
 		}
 	}

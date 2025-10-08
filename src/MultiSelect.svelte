@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from "svelte";
 	import Option from "./Option";
 
 	let {
@@ -84,15 +85,18 @@
 		}
 	}
 
-	$effect(() => {
+	onMount(() => {
 		if (selectElement !== null) {
+			/** @type {HTMLSelectElement} */
 			const select = document.querySelector(selectElement);
 
 			if (select) {
 				select.style.display = 'none';
 
+				/** @type {HTMLOptionElement[]} */
 				selectOptions = Array.from(select.children);
-				options = selectOptions.map((option, i) => new Option(i, option.textContent, option.value, option.selcted));
+				options = selectOptions.map((option, i) => new Option(i, option.textContent, option.value, option.selected));
+				selectedItems = options.filter(x => x.Selected);
 			}
 		}
 
