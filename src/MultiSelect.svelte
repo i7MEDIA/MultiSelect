@@ -97,8 +97,9 @@
 				selectOptions = Array.from(select.children);
 				options = selectOptions.map((option, i) => new Option(
 					i,
-					(option?.title.trim() || option.textContent.trim()),
-					option.value, option.selected
+					option.textContent.trim(),
+					option.value, option.selected,
+					option.title.trim() !== '' ? option.title.trim() : null
 				));
 				selectedItems = options.filter(x => x.Selected);
 			}
@@ -119,7 +120,7 @@
 >
 	{#if selectedItems.length}
 		{#each selectedItems as item}
-			<span class="{(selectedOptionCssClass + ' multi-select__selected').trim()}">
+			<span class="{(selectedOptionCssClass + ' multi-select__selected').trim()}" title={item.Title !== null ? item.Title : undefined}>
 				{item}
 				<button class="multi-select__remove" onclick={(e) => removeItem(e, item)}>&times;</button>
 			</span>
@@ -143,7 +144,14 @@
 
 		<ul>
 			{#each menuItems as item}
-				<li><button onclick={() => onSelect(item)}>{item}</button></li>
+				<li>
+					<button
+						onclick={() => onSelect(item)}
+						title={item.Title !== null ? item.Title : undefined}
+					>
+					{item}
+				</button>
+			</li>
 			{/each}
 		</ul>
 	</div>
